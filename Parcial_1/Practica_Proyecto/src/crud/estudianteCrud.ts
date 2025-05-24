@@ -10,7 +10,7 @@ const cursoRepo = appdataSource.getRepository(Curso);
 // Crear un nuevo estudiante
 router.post("/estudiante", (async (req: Request, res: Response) => {
   try {
-    const { nombre, email, cursoId } = req.body;
+    const { nombre, email,cedula, cursoId } = req.body;
 
     if (cursoId) {
       const curso = await cursoRepo.findOneBy({ id: cursoId });
@@ -18,11 +18,12 @@ router.post("/estudiante", (async (req: Request, res: Response) => {
         return res.status(404).json({ error: "Curso no encontrado" });
       }
 
-      const estudiante = estudianteRepo.create({ nombre, email, curso });
+      const estudiante = estudianteRepo.create({ nombre, email, curso,cedula });
       await estudianteRepo.save(estudiante);
       res.status(201).json(estudiante);
     } else {
-      const estudiante = estudianteRepo.create({ nombre, email });
+      const estudiante = estudianteRepo.create({ nombre, email,cedula });
+      // Si no se proporciona un cursoId, se crea el estudiante sin curso
       await estudianteRepo.save(estudiante);
       res.status(201).json(estudiante);
     }
@@ -64,7 +65,7 @@ router.get("/estudiante/:id", (async (req: Request, res: Response) => {
 // Actualizar un estudiante
 router.put("/estudiante/:id", (async (req: Request, res: Response) => {
   try {
-    const { nombre, email, cursoId } = req.body;
+    const { nombre, email, cedula, cursoId } = req.body;
     const estudiante = await estudianteRepo.findOne({
       where: { id: parseInt(req.params.id) },
       relations: ["curso"]
@@ -84,6 +85,7 @@ router.put("/estudiante/:id", (async (req: Request, res: Response) => {
 
     estudiante.nombre = nombre;
     estudiante.email = email;
+    estudiante.cedula = cedula;
     await estudianteRepo.save(estudiante);
     res.json(estudiante);
   } catch (error) {
