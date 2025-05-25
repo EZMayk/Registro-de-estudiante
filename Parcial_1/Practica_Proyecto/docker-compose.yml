@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:16
+    container_name: postgres-tareas
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 2025*_*
+      POSTGRES_DB: registro-estudiante
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db:/docker-entrypoint-initdb.d   # <--- Monta tus scripts de inicialización
+
+volumes:
+  pgdata:
