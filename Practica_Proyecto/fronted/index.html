@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de Estudiantes</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>📘 Panel</h2>
+      <ul>
+        <li><button onclick="cambiarVista('inicio')">Inicio</button></li>
+        <li><button onclick="cambiarVista('tablaCursos')">Cursos</button></li>
+        <li><button onclick="cambiarVista('tablaEstudiantes')">Estudiantes</button></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <!-- INICIO -->
+      <section id="inicio" class="vista">
+        <h1>Bienvenida</h1>
+        <p>Usa el menú para registrar estudiantes o cursos.</p>
+      </section>
+
+      <!-- ESTUDIANTES -->
+      <section id="estudiantes" class="vista oculto">
+        <h2>📄 Registro de Estudiantes</h2>
+        <form id="formEstudiante">
+          <input type="text" id="nombre" placeholder="Nombre" required />
+          <input type="email" id="email" placeholder="Email" required />
+          <input type="text" id="cedula" placeholder="Cédula" required />
+          <label for="cursoSelect">Curso</label>
+          <select id="cursoSelect" required>
+            <option disabled selected value="">Selecciona un curso</option>
+          </select>
+          <button type="submit">Guardar</button>
+        </form>
+      </section>
+
+      <!-- CURSOS -->
+      <section id="cursos" class="vista oculto">
+        <h2>📚 Registro de Cursos</h2>
+        <form id="formCurso">
+          <input type="text" id="nombreCurso" placeholder="Nombre del curso" required />
+          <input type="text" id="descripcionCurso" placeholder="Descripción" required />
+          <button type="submit">Guardar</button>
+        </form>
+      </section>
+
+      <!-- TABLA ESTUDIANTES -->
+      <section id="tablaEstudiantes" class="vista oculto">
+        <h2>📊 Tabla de Estudiantes</h2>
+        <button onclick="cambiarVista('estudiantes')">Crear</button>
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Cédula</th>
+              <th>Curso</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tablaEstudiantesBody"></tbody>
+        </table>
+      </section>
+
+      <!-- TABLA CURSOS -->
+      <section id="tablaCursos" class="vista oculto">
+        <h2>📚 Tabla de Cursos</h2>
+        <button onclick="cambiarVista('cursos')">Crear</button>
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tablaCursosBody"></tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+   <script src="script.js"></script>
+
+</body>
+
+</html>
