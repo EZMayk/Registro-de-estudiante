@@ -3,11 +3,10 @@ import 'reflect-metadata'
 
 export const initDatabase = async () => {
     try {
-        await appdataSource.initialize(); // ← FALTABA ESTE await
-        console.log("Base de datos inicializada correctamente");
-        return appdataSource;
-    } catch (ex) {
-        console.log("Error al inicializar la base de datos");
-        throw ex;
+        const dataSource = await appdataSource.initialize();
+        return dataSource;
+    } catch (error) {
+        console.error("Error al inicializar la base de datos:", error);
+        throw error;
     }
 }
