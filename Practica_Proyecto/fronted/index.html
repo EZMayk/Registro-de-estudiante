@@ -6,12 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Panel de Estudiantes</title>
   <link rel="stylesheet" href="style.css" />
+  
 </head>
 
 <body>
   <div class="container">
     <aside class="sidebar">
-      <h2>📘 Panel</h2>
+      <h2>Panel</h2>
       <ul>
         <li><button onclick="cambiarVista('inicio')">Inicio</button></li>
         <li><button onclick="cambiarVista('tablaCursos')">Cursos</button></li>
@@ -52,40 +53,36 @@
       </section>
 
       <!-- TABLA ESTUDIANTES -->
-      <section id="tablaEstudiantes" class="vista oculto">
-        <h2>📊 Tabla de Estudiantes</h2>
-        <button onclick="cambiarVista('estudiantes')">Crear</button>
-        <table border="1">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Email</th>
-              <th>Cédula</th>
-              <th>Curso</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody id="tablaEstudiantesBody"></tbody>
-        </table>
-      </section>
+    <section id="tablaEstudiantes" class="vista oculto">
+      <h2>📊 Tabla de Estudiantes</h2>
+      <button onclick="cambiarVista('estudiantes')">Crear</button>
+      <table class="tabla-simple">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Cédula</th>
+            <th>Curso</th>
+          </tr>
+        </thead>
+        <tbody id="tablaEstudiantesBody"></tbody>
+      </table>
+    </section>
 
-      <!-- TABLA CURSOS -->
+
       <section id="tablaCursos" class="vista oculto">
         <h2>📚 Tabla de Cursos</h2>
         <button onclick="cambiarVista('cursos')">Crear</button>
-        <table border="1">
+        <table class="tabla-simple">
           <thead>
             <tr>
               <th>Nombre</th>
               <th>Descripción</th>
-              <th>Acciones</th>
             </tr>
           </thead>
           <tbody id="tablaCursosBody"></tbody>
         </table>
-      </section>
-    </main>
-  </div>
+
    <script src="script.js"></script>
 
 </body>

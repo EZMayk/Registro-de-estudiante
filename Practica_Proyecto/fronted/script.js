@@ -15,8 +15,8 @@
               <td>${est.cedula}</td>
               <td>${est.curso?.nombre || 'Sin curso'}</td>
               <td>
-                <button onclick="editarEstudiante(${est.id})">✏️</button>
-                <button onclick="eliminarEstudiante(${est.id})">🗑️</button>
+                <button onclick="editarEstudiante(${est.id})">Editar</button>
+                <button onclick="eliminarEstudiante(${est.id})">Eliminar</button>
               </td>
             `;
             tbody.appendChild(fila);
@@ -108,8 +108,8 @@
               <td>${curso.nombre}</td>
               <td>${curso.descripcion}</td>
               <td>
-                <button onclick="editarCurso(${curso.id})">✏️</button>
-                <button onclick="eliminarCurso(${curso.id})">🗑️</button>
+                <button onclick="editarCurso(${curso.id})">Editar</button>
+                <button onclick="eliminarCurso(${curso.id})">Eliminar</button>
               </td>
             `;
             tbody.appendChild(fila);
