@@ -1,11 +1,11 @@
 import { Router, Request, Response, RequestHandler } from "express";
-import { appdataSource } from "../data-source";
 import { Estudiante } from "../models/Estudiantes";
 import { Curso } from "../models/Curso";
+import DatabaseSingleton from "../data-source";
 
 const router = Router();
-const estudianteRepo = appdataSource.getRepository(Estudiante);
-const cursoRepo = appdataSource.getRepository(Curso);
+const estudianteRepo = DatabaseSingleton.getInstance().getDataSource().getRepository(Estudiante);
+const cursoRepo = DatabaseSingleton.getInstance().getDataSource().getRepository(Curso);
 
 // Crear un nuevo estudiante
 router.post("/estudiante", (async (req: Request, res: Response) => {
