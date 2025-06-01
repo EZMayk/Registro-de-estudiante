@@ -5,7 +5,7 @@ import { Estudiante } from "./models/Estudiantes";
 
 class DatabaseSingleton {
     private static instance: DatabaseSingleton;
-    private dataSource: DataSource;
+    private readonly dataSource: DataSource;
     private initialized: boolean = false;
 
     private constructor() {
@@ -54,5 +54,4 @@ class DatabaseSingleton {
     }
 }
 
-// Mantener la compatibilidad con el código existente
-export const appdataSource = DatabaseSingleton.getInstance().getDataSource();
+export default DatabaseSingleton;
