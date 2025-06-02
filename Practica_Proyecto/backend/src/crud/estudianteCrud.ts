@@ -1,6 +1,7 @@
 import { Router, Request, Response, RequestHandler } from "express";
 import { Estudiante } from "../models/Estudiantes";
 import { Curso } from "../models/Curso";
+import { EntityFactory } from "../models/entityFactory";
 import DatabaseSingleton from "../data-source";
 
 const router = Router();
@@ -12,21 +13,20 @@ router.post("/estudiante", (async (req: Request, res: Response) => {
   try {
     const { nombre, email, cedula, cursoId } = req.body;
 
+    let estudiante: Estudiante;
+
     if (cursoId) {
       const curso = await cursoRepo.findOneBy({ id: cursoId });
       if (!curso) {
         return res.status(404).json({ error: "Curso no encontrado" });
       }
-
-      const estudiante = estudianteRepo.create({ nombre, email, curso, cedula });
-      await estudianteRepo.save(estudiante);
-      res.status(201).json(estudiante);
+      estudiante = EntityFactory.createEstudiante(nombre, email, cedula, curso);
     } else {
-      const estudiante = estudianteRepo.create({ nombre, email, cedula });
-      // Si no se proporciona un cursoId, se crea el estudiante sin curso
-      await estudianteRepo.save(estudiante);
-      res.status(201).json(estudiante);
+      estudiante = EntityFactory.createEstudiante(nombre, email, cedula);
     }
+
+    await estudianteRepo.save(estudiante);
+    res.status(201).json(estudiante);
   } catch (e) {
     console.error('Se detectó un error, se relanza:', e);
     throw e;
@@ -113,4 +113,4 @@ router.delete("/estudiante/:id", (async (req: Request, res: Response) => {
   }
 }) as RequestHandler);
 
-export default router; 
+export default router;

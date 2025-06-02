@@ -1,5 +1,6 @@
 import { Router, Request, Response, RequestHandler } from "express";
 import { Curso } from "../models/Curso";
+import { EntityFactory } from "../models/entityFactory";
 import DatabaseSingleton from "../data-source";
 
 const router = Router();
@@ -9,7 +10,7 @@ const cursoRepo = DatabaseSingleton.getInstance().getDataSource().getRepository(
 router.post("/curso", (async (req: Request, res: Response) => {
   try {
     const { nombre, descripcion } = req.body;
-    const curso = cursoRepo.create({ nombre, descripcion });
+    const curso = EntityFactory.createCurso(nombre, descripcion);
     await cursoRepo.save(curso);
     res.status(201).json(curso);
   } catch (e) {
