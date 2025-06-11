@@ -11,11 +11,11 @@ class DatabaseSingleton {
     private constructor() {
         this.dataSource = new DataSource({
             type: "postgres",
-            host: process.env.DB_HOST || "aws-0-us-east-2.pooler.supabase.com",
-            port: Number(process.env.DB_PORT) || 6543,
-            username: process.env.DB_USERNAME || "postgres.qgxejngkqgzxgvszmeeo",
-            password: process.env.DB_PASSWORD || "Estudiantes2025*_*",
-            database: process.env.DB_NAME || "postgres",
+            host: "aws-0-us-east-2.pooler.supabase.com",
+            port: 6543,
+            username: "postgres.qgxejngkqgzxgvszmeeo",
+            password: "Estudiantes2025*_*",
+            database: "postgres",
             synchronize: true,
             logging: true,
             entities: [Curso, Estudiante],
