@@ -3,16 +3,32 @@ services:
 
   db:
     image: postgres:16
-    container_name: postgres-tareas
+    container_name: registro-estudiante-db
+    restart: always
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 2025*_*
       POSTGRES_DB: registro-estudiante
-    ports:
-      - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./db:/docker-entrypoint-initdb.d   # <--- Monta tus scripts de inicialización
+      - ./db:/docker-entrypoint-initdb.d 
+
+  app:
+    build: .
+    container_name: registro-estudiante
+    ports:
+      - "5000:3000"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: 2025*_*
+      DB_NAME: registro_estudiante
 
 volumes:
+  postgres_data:
   pgdata:
